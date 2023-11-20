@@ -1,35 +1,28 @@
-
+# code by Genna Gams
 Given /the following representatives exist/ do |reps_list| 
   reps_list.hashes.each do |rep|
     Representative.create(name: rep[:name])
   end
 end
 
-Given /Gavin Newsom has the following news articles/ do |articles|
-  rep_id = Representative.find_by(name: 'Gavin Newsom').id
-  puts rep_id
-  puts "*********************"
+Given /we have the following news articles/ do |articles|
   articles.hashes.each do |article|
-    updated_articles = rep[:news_items].append({title: article[:title], description: article[:description], link: article[:link]})
-    rep.update(news_items: updated_articles)
+    rep_id = Representative.find_by(name: article[:rep]).id
+    NewsItem.create(title: article[:title], description: article[:description], link: article[:link], representative_id: rep_id)
   end
 end
 
-Given('Alexander Ocasio Cortez has the following news articles:') do |table|
-  # table is a Cucumber::MultilineArgument::DataTable
-  pending # Write code here that turns the phrase above into concrete actions
+When /I click on news articles for (.*)/ do |name|
+  tr = page.find(:xpath, ".//tr[td='#{name}']/td/a")
+  tr.click
 end
 
-When('I click on news articles for Gavin Newsom') do
-  pending # Write code here that turns the phrase above into concrete actions
+Then /there should be (.*) articles/ do |num|
+  num_rows = page.all('table tr').count
+  # subtract 1 since the table header is technically a table row, but we don't want to count it
+  expect(num_rows - 1).to eq(num.to_i)
 end
 
-Then /I should see (.*) articles/ do |num|
-  puts page.body
-  assert_select "body tr", num
-end
-
-Then /There should be (.*) entry for (.*)/ do |num, name|
-  puts num
-  puts name
+Then /there should be (.*) entry for (.*)/ do |num, name|
+  expect(Representative.where(name: name).count).to eq(num.to_i)
 end
