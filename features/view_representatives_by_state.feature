@@ -6,8 +6,8 @@ Feature: display list of representatives for a given state
 
 Background: representatives have been added to database
 
-Scenario:
   Given the following representatives exist:
+  |name                    |
   |Gavin Newsom            |
   |Alexander Ocasio Cortez |
 
@@ -22,10 +22,13 @@ Scenario:
   |AOC among Dems who launch a fundraising campaign on a progressive platform|Democratic Reps. Alexandria Ocasio-Cortez of New York, Ilhan Omar of Minnesota, Rashida Tlaib of Michigan and Ayanna Pressley of Massachusetts are launching a joint fundraising committee called the "Squad Victory Fund," the latest effort by the well-known freshmen lawmakers to support one another and their advocacy for progressive priorities.|https://www.cnn.com/2020/07/01/politics/squad-ocasio-cortez-tlaib-omar-pressley/index.html                              |
   |AOC opts to skip debate citing social distancing rules                    |New York Rep. Alexandria Ocasio-Cortez insisted Monday she’s “not skipping debates” like her predecessor, Joe Crowley, did to disastrous effect two years ago — even though she is ducking one Wednesday citing social distancing rules despite having been out at a George Floyd protest and other group events this month.                            |https://nypost.com/2020/06/15/aoc-defends-decision-not-to-attend-wednesdays-debate-in-person/                           |
 
+
+Scenario:
   When I go to the representatives page
   And I fill in address with California
   And I press submit
 
   When I click on news articles for Gavin Newsom
   Then I should see 2 articles
+  And there should be 1 entry for Gavin Newsom
   
