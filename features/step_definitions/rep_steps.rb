@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given /the following representatives exist/ do |reps_list|
   reps_list.hashes.each do |rep|
     Representative.create(name: rep[:name])
@@ -8,9 +10,9 @@ Given /we have the following news articles/ do |articles|
   articles.hashes.each do |article|
     rep_id = Representative.find_by(name: article[:rep]).id
     NewsItem.create(
-      title: article[:title], 
-      description: article[:description], 
-      link: article[:link], 
+      title:             article[:title],
+      description:       article[:description],
+      link:              article[:link],
       representative_id: rep_id
     )
   end
