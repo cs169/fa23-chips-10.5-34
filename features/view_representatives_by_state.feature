@@ -1,4 +1,3 @@
-# code by Genna Gams
 Feature: display list of representatives for a given state
 
   As an informed citizen

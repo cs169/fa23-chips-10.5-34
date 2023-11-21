@@ -25,17 +25,19 @@ class Representative < ApplicationRecord
       if Representative.find_by(name: official.name).nil?
         rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
             title: title_temp })
-        reps.push(rep)
       else
         rep = Representative.find_by(name: official.name)
         rep.update(ocdid: ocdid_temp, title: title_temp)
-        reps.push(rep)
       end
+<<<<<<< HEAD
 
       rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
           title: title_temp, address: address_temp, party: party_temp, photo: photo_temp})
       reps.push(rep)
 >>>>>>> [backend] I used the api notation for the newly added aspects of the representative information hopefully it works out the spec is pretty vague
+=======
+      reps.push(rep)
+>>>>>>> fixed rubocop issues
     end
 
     reps
