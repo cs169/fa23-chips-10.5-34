@@ -11,8 +11,9 @@ class RepresentativesController < ApplicationController
     # used other news_items controller as ref
     # @representative var alr set by before_action :set_representative
   end
-  
+
   private
+
   def set_representative
     @representative = Representative.find(
       params[:representative_id]
