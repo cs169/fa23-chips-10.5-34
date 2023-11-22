@@ -15,8 +15,10 @@ class RepresentativesController < ApplicationController
   private
 
   def set_representative
-    @representative = Representative.find(
-      params[:representative_id]
-    )
+    if params[:id]
+      @representative = Representative.find(
+        params[:id]
+      )
+    end
   end
 end
