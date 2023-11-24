@@ -1,0 +1,24 @@
+project:
+  name: 'CS169-fa23-34'
+  owner: 'fa23'
+  teamId: '34'
+  identities: {}
+  notifications:
+    email: 'ggams@berkeley.edu'
+  members:
+    member1:
+      name: 'Genna'
+      surname: 'Gams' 
+      githubUsername: 'ggams2020'
+    member2:
+      name: 'Abigail'
+      surname: 'Delgado' 
+      githubUsername: 'abbygee'
+    member3:
+      name: 'Evan'
+      surname: 'Campbell-Widmer' 
+      githubUsername: 'evancampmer'
+    member4:
+      name: 'Rohan'
+      surname: 'Vaidya' 
+      githubUsername: 'RVaidya149124092u35'
