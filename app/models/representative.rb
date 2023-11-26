@@ -9,11 +9,17 @@ class Representative < ApplicationRecord
     rep_info.officials.each_with_index do |official, index|
       ocdid_temp = ''
       title_temp = ''
+      address_temp = ''
+      party_temp = ''
+      photo_temp = ''
 
       rep_info.offices.each do |office|
         if office.official_indices.include? index
           title_temp = office.name
           ocdid_temp = office.division_id
+          address_temp = office.address
+          party_temp = office.party
+          photo_temp = office.photoUrl
         end
       end
       if Representative.find_by(name: official.name).nil?
@@ -25,6 +31,11 @@ class Representative < ApplicationRecord
         rep.update(ocdid: ocdid_temp, title: title_temp)
         reps.push(rep)
       end
+
+      rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
+          title: title_temp, address: address_temp, party: party_temp, photo: photo_temp})
+      reps.push(rep)
+>>>>>>> [backend] I used the api notation for the newly added aspects of the representative information hopefully it works out the spec is pretty vague
     end
 
     reps
