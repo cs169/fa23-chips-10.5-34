@@ -24,7 +24,7 @@ class Representative < ApplicationRecord
         party_temp = official.party
         photo_temp = official.photoUrl
         rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
-            title: title_temp })
+            title: title_temp, address: address_temp, party: party_temp, photo: photo_temp })
       else
         rep = Representative.find_by(name: official.name)
         rep.update(ocdid: ocdid_temp, title: title_temp)
@@ -32,7 +32,7 @@ class Representative < ApplicationRecord
 <<<<<<< HEAD
 
       rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
-          title: title_temp, address: address_temp, party: party_temp, photo: photo_temp})
+          title: title_temp, address: address_temp, party: party_temp, photo: photo_temp })
 <<<<<<< HEAD
       reps.push(rep)
 >>>>>>> [backend] I used the api notation for the newly added aspects of the representative information hopefully it works out the spec is pretty vague
