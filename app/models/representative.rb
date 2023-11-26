@@ -20,15 +20,21 @@ class Representative < ApplicationRecord
         end
       end
       if Representative.find_by(name: official.name).nil?
+<<<<<<< HEAD
         address_temp = official.address
         party_temp = official.party
         photo_temp = official.photoUrl
         rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
             title: title_temp, address: address_temp, party: party_temp, photo: photo_temp })
+=======
+        rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
+            title: title_temp })
+>>>>>>> 36a507d4fbb98ee6618f9b9bcd1ffacc7f3feb68
       else
         rep = Representative.find_by(name: official.name)
         rep.update(ocdid: ocdid_temp, title: title_temp)
       end
+<<<<<<< HEAD
 <<<<<<< HEAD
 
       rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
@@ -39,6 +45,8 @@ class Representative < ApplicationRecord
 =======
 =======
 >>>>>>> b831eed7e3f60a5e668155fccfacb6324e31b766
+=======
+>>>>>>> 36a507d4fbb98ee6618f9b9bcd1ffacc7f3feb68
       reps.push(rep)
 >>>>>>> fixed rubocop issues
     end
