@@ -5,14 +5,9 @@ class Representative < ApplicationRecord
 
   def self.civic_api_to_representative_params(rep_info)
     reps = []
-
     rep_info.officials.each_with_index do |official, index|
-      ocdid_temp = ''
       title_temp = ''
-      address_temp = ''
-      party_temp = ''
-      photo_temp = ''
-
+      ocdid_temp = ''
       rep_info.offices.each do |office|
         if office.official_indices.include? index
           title_temp = office.name
@@ -20,37 +15,28 @@ class Representative < ApplicationRecord
         end
       end
       if Representative.find_by(name: official.name).nil?
-<<<<<<< HEAD
-        address_temp = official.address
-        party_temp = official.party
-        photo_temp = official.photoUrl
-        rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
-            title: title_temp, address: address_temp, party: party_temp, photo: photo_temp })
-=======
-        rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
-            title: title_temp })
->>>>>>> 36a507d4fbb98ee6618f9b9bcd1ffacc7f3feb68
+        rep = Representative.create!(
+          {
+            name:    official.name,
+            ocdid:   ocdid_temp,
+            title:   title_temp,
+            address: official.address,
+            party:   official.party,
+            photo:   official.photo_url
+          }
+        )
       else
         rep = Representative.find_by(name: official.name)
-        rep.update(ocdid: ocdid_temp, title: title_temp)
+        rep.update(
+          ocdid:   ocdid_temp,
+          title:   title_temp,
+          address: official.address,
+          party:   official.party,
+          photo:   official.photo_url
+        )
       end
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-      rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
-          title: title_temp, address: address_temp, party: party_temp, photo: photo_temp })
-<<<<<<< HEAD
       reps.push(rep)
->>>>>>> [backend] I used the api notation for the newly added aspects of the representative information hopefully it works out the spec is pretty vague
-=======
-=======
->>>>>>> b831eed7e3f60a5e668155fccfacb6324e31b766
-=======
->>>>>>> 36a507d4fbb98ee6618f9b9bcd1ffacc7f3feb68
-      reps.push(rep)
->>>>>>> fixed rubocop issues
     end
-
     reps
   end
 end
