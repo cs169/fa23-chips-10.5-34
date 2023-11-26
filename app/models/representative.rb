@@ -17,12 +17,12 @@ class Representative < ApplicationRecord
         if office.official_indices.include? index
           title_temp = office.name
           ocdid_temp = office.division_id
-          address_temp = office.address
-          party_temp = office.party
-          photo_temp = office.photoUrl
         end
       end
       if Representative.find_by(name: official.name).nil?
+        address_temp = official.address
+        party_temp = official.party
+        photo_temp = official.photoUrl
         rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
             title: title_temp })
       else
