@@ -17,6 +17,9 @@ class Representative < ApplicationRecord
         if office.official_indices.include? index
           title_temp = office.name
           ocdid_temp = office.division_id
+          address_temp = office.address
+          party_temp = office.party
+          photo_temp = office.photoUrl
         end
       end
       if Representative.find_by(name: official.name).nil?
@@ -33,9 +36,12 @@ class Representative < ApplicationRecord
 
       rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
           title: title_temp, address: address_temp, party: party_temp, photo: photo_temp})
+<<<<<<< HEAD
       reps.push(rep)
 >>>>>>> [backend] I used the api notation for the newly added aspects of the representative information hopefully it works out the spec is pretty vague
 =======
+=======
+>>>>>>> b831eed7e3f60a5e668155fccfacb6324e31b766
       reps.push(rep)
 >>>>>>> fixed rubocop issues
     end
