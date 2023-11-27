@@ -15,16 +15,16 @@ class Representative < ApplicationRecord
         end
       end
       address_temp = official.address
-      if Representative.find_by(name: official.name).nil?
-        rep = create_rep(official, ocdid_temp, title_temp, address_temp)
-      else 
-        rep = rep_test(official, ocdid_temp, title_temp, address_temp)
-      end
+      rep = if Representative.find_by(name: official.name).nil?
+              create_rep(official, ocdid_temp, title_temp, address_temp)
+            else
+              rep_test(official, ocdid_temp, title_temp, address_temp)
+            end
       reps.push(rep)
     end
     reps
   end
-  
+
   def rep_test(official, ocdid, title, address)
     rep = Representative.find_by(name: official.name)
     rep.update(
@@ -43,7 +43,7 @@ class Representative < ApplicationRecord
   end
 
   def create_rep(official, ocdid, title, address)
-    rep = Representative.create!(
+    Representative.create!(
       {
         name:  official.name,
         ocdid: ocdid,
@@ -58,6 +58,5 @@ class Representative < ApplicationRecord
         photo: official.photo_url
       }
     )
-    rep
   end
 end
