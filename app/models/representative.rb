@@ -23,12 +23,12 @@ class Representative < ApplicationRecord
         rep.update(
           ocdid: ocdid_temp,
           title: title_temp,
-          line1: address_temp.line1,
-          line2: address_temp.line2,
-          line3: address_temp.line3,
-          city:  address_temp.city,
-          state: address_temp.state,
-          zip:   address_temp.zip,
+          line1: address_temp['line1'],
+          line2: address_temp['line2'],
+          line3: address_temp['line3'],
+          city:  address_temp['city'],
+          state: address_temp['state'],
+          zip:   address_temp['zip'],
           party: official.party,
           photo: official.photo_url
         )
