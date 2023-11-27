@@ -14,10 +14,11 @@ class Representative < ApplicationRecord
           ocdid_temp = office.division_id
         end
       end
-      address_temp = official.address
       if Representative.find_by(name: official.name).nil?
+        address_temp = official.address
         rep = create_rep(address_temp, title_temp, ocdid_temp, official)
       else
+        address_temp = official.address
         rep = Representative.find_by(name: official.name)
         rep.update(
           ocdid: ocdid_temp,
