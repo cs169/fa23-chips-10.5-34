@@ -14,46 +14,50 @@ class Representative < ApplicationRecord
           ocdid_temp = office.division_id
         end
       end
+      address_temp = official.address
       if Representative.find_by(name: official.name).nil?
-        address_temp = official.address
-        line1 = address_temp.line1
-        line2 = address_temp.line2
-        line3 = address_temp.line3
-        city = address_temp.city
-        state = address_temp.state
-        zip = address_temp.zip
-        rep = Representative.create!(
-          {
-            name:    official.name,
-            ocdid:   ocdid_temp,
-            title:   title_temp,
-            line1:   line1,
-            line2:   line2,
-            line3:   line3,
-            city:    city,
-            state:   state,
-            zip:     zip,
-            party:   official.party,
-            photo:   official.photo_url
-          }
-        )
-      else
-        rep = Representative.find_by(name: official.name)
-        rep.update(
-          ocdid:   ocdid_temp,
-          title:   title_temp,
-          line1:   line1,
-          line2:   line2,
-          line3:   line3,
-          city:    city,
-          state:   state,
-          zip:     zip,
-          party:   official.party,
-          photo:   official.photo_url
-        )
+        rep = create_rep(official, ocdid_temp, title_temp, address_temp)
+      else 
+        rep = rep_test(official, ocdid_temp, title_temp, address_temp)
       end
       reps.push(rep)
     end
     reps
+  end
+  
+  def rep_test(official, ocdid, title, address)
+    rep = Representative.find_by(name: official.name)
+    rep.update(
+      ocdid: ocdid,
+      title: title,
+      line1: address.line1,
+      line2: address.line2,
+      line3: address.line3,
+      city:  address.city,
+      state: address.state,
+      zip:   address.zip,
+      party: official.party,
+      photo: official.photo_url
+    )
+    rep
+  end
+
+  def create_rep(official, ocdid, title, address)
+    rep = Representative.create!(
+      {
+        name:  official.name,
+        ocdid: ocdid,
+        title: title,
+        line1: address.line1,
+        line2: address.line2,
+        line3: address.line3,
+        city:  address.city,
+        state: address.state,
+        zip:   address.zip,
+        party: official.party,
+        photo: official.photo_url
+      }
+    )
+    rep
   end
 end
