@@ -15,19 +15,19 @@ class Representative < ApplicationRecord
         end
       end
       if Representative.find_by(name: official.name).nil?
-        line1, line2, line3, city, state, zip = helper_representative(title_temp, ocdid_temp, official)
-        rep = create_rep(line1, line2, line3, city, state, zip, title_temp, ocdid_temp, official)
+        address_temp = official.address
+        rep = create_rep(address_temp, title_temp, ocdid_temp, official)
       else
         rep = Representative.find_by(name: official.name)
         rep.update(
           ocdid: ocdid_temp,
           title: title_temp,
-          line1: line1,
-          line2: line2,
-          line3: line3,
-          city:  city,
-          state: state,
-          zip:   zip,
+          line1: address_temp.line1,
+          line2: address_temp.line2,
+          line3: address_temp.line3,
+          city:  address_temp.city,
+          state: address_temp.state,
+          zip:   address_temp.zip,
           party: official.party,
           photo: official.photo_url
         )
@@ -37,33 +37,22 @@ class Representative < ApplicationRecord
     reps
   end
 
-  def helper_representative(official)
-    address_temp = official.address
-    line1 = address_temp.line1
-    line2 = address_temp.line2
-    line3 = address_temp.line3
-    city = address_temp.city
-    state = address_temp.state
-    zip = address_temp.zip
-    return line1, line2, line3, city, state, zip
-  end
-
-  def create_rep(line1, line2, line3, city, state, zip, title, ocd, official)
-    r = Representative.create!(
+  def create_rep(address, title, ocd, official)
+    rep = Representative.create!(
       {
         name:  official.name,
         ocdid: ocd,
         title: title,
-        line1: line1,
-        line2: line2,
-        line3: line3,
-        city:  city,
-        state: state,
-        zip:   zip,
+        line1: address.line1,
+        line2: address.line2,
+        line3: address.line3,
+        city:  address.city,
+        state: address.state,
+        zip:   address.zip,
         party: official.party,
         photo: official.photo_url
       }
     )
-    r
+    rep
   end
 end
