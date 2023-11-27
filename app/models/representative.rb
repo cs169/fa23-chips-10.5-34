@@ -49,7 +49,7 @@ class Representative < ApplicationRecord
   end
 
   def create_rep(line1, line2, line3, city, state, zip, title, ocd, official)
-    Representative.create!(
+    r = Representative.create!(
       {
         name:  official.name,
         ocdid: ocd,
@@ -64,5 +64,6 @@ class Representative < ApplicationRecord
         photo: official.photo_url
       }
     )
+    r
   end
 end
