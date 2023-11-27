@@ -1,12 +1,18 @@
 <style>
   IMG.rep-photo {
     display: block;
+    text-align: center;
   }
 </style>
 
 <div>
-  <img class="rep-photo" src="../../assets/images/no-img.jpeg" width="500" height="500">
+  <img class="rep-photo" src="../../assets/images/no-img.jpeg" width="400" height="400">
   <h1 class="text-center"><%= @representative.name %></h1>
   <h2 class="text-center"><%= @representative.party %></h2>
-  <h2 class="text-center"><%= @representative.address %></h2>
+  <h3 class="text-center">
+    <%= @representative.address.street %>
+    <%= @representative.address.city %>
+    <%= @representative.address.state %>
+    <%= @representative.address.zip %>
+  </h3>
 </div>
