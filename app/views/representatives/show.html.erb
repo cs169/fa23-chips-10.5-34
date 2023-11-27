@@ -10,7 +10,13 @@
   <h1 class="text-center"><%= @representative.name %></h1>
   <h2 class="text-center"><%= @representative.party %></h2>
   <h3 class="text-center">
-    <%= @representative.street %>
+    <%= @representative.line1 %>
+    <% if @representative.line2.present? %>
+      <%= @representative.line2 %>
+    <% end %>
+    <% if @representative.line3.present? %>
+      <%= @representative.line3 %>
+    <% end %>
     <%= @representative.city %>
     <%= @representative.state %>
     <%= @representative.zip %>
