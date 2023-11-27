@@ -15,12 +15,24 @@ class Representative < ApplicationRecord
         end
       end
       if Representative.find_by(name: official.name).nil?
+        address_temp = official.address
+        line1 = address_temp.line1
+        line2 = address_temp.line2
+        line3 = address_temp.line3
+        city = address_temp.city
+        state = address_temp.state
+        zip = address_temp.zip
         rep = Representative.create!(
           {
             name:    official.name,
             ocdid:   ocdid_temp,
             title:   title_temp,
-            address: official.address,
+            line1:   line1,
+            line2:   line2,
+            line3:   line3,
+            city:    city,
+            state:   state,
+            zip:     zip,
             party:   official.party,
             photo:   official.photo_url
           }
@@ -30,7 +42,12 @@ class Representative < ApplicationRecord
         rep.update(
           ocdid:   ocdid_temp,
           title:   title_temp,
-          address: official.address,
+          line1:   line1,
+          line2:   line2,
+          line3:   line3,
+          city:    city,
+          state:   state,
+          zip:     zip,
           party:   official.party,
           photo:   official.photo_url
         )
