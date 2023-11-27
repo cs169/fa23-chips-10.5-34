@@ -37,42 +37,6 @@ class Representative < ApplicationRecord
     reps
   end
 
-  def rep_test(official, ocdid, title, address)
-    rep = Representative.find_by(name: official.name)
-    rep.update(
-      ocdid: ocdid,
-      title: title,
-      line1: address.line1,
-      line2: address.line2,
-      line3: address.line3,
-      city:  address.city,
-      state: address.state,
-      zip:   address.zip,
-      party: official.party,
-      photo: official.photo_url
-    )
-    rep
-  end
-
-  def create_rep(official, ocdid, title, address)
-    Representative.create!(
-      {
-        name:  official.name,
-        ocdid: ocdid,
-        title: title,
-        line1: address.line1,
-        line2: address.line2,
-        line3: address.line3,
-        city:  address.city,
-        state: address.state,
-        zip:   address.zip,
-        party: official.party,
-        photo: official.photo_url
-      }
-    )
-  end
-
-
   def helper_representative(official)
     address_temp = official.address
     line1 = address_temp.line1
@@ -81,11 +45,11 @@ class Representative < ApplicationRecord
     city = address_temp.city
     state = address_temp.state
     zip = address_temp.zip
-    return line1, line2, line3, city, state, zip
+    [line1, line2, line3, city, state, zip]
   end
 
   def create_rep(line1, line2, line3, city, state, zip, title, ocd, official)
-    r = Representative.create!(
+    Representative.create!(
       {
         name:  official.name,
         ocdid: ocd,
@@ -100,6 +64,5 @@ class Representative < ApplicationRecord
         photo: official.photo_url
       }
     )
-    r
   end
 end
