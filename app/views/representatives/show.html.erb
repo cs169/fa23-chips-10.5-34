@@ -1,16 +1,19 @@
 <style>
   IMG.rep-photo {
     display: block;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
 
 <div>
-  <img class="rep-photo" src="../../assets/images/no-img.jpeg" width="400" height="400">
+  <img class="rep-photo" src="<%= @no_img %>" width="400" height="400">
   <h1 class="text-center"><%= @representative.name %></h1>
   <h2 class="text-center"><%= @representative.party %></h2>
   <h3 class="text-center">
-    <%= @representative.line1 %>
+    <% if @representative.line1.present? %>
+      <%= @representative.line1 %>
+    <% end %>
     <% if @representative.line2.present? %>
       <%= @representative.line2 %>
     <% end %>
