@@ -38,7 +38,7 @@ class Representative < ApplicationRecord
   end
 
   def create_rep(address, title, ocd, official)
-    Representative.create!(
+    rep = Representative.create!(
       {
         name:  official.name,
         ocdid: ocd,
