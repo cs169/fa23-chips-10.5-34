@@ -19,7 +19,7 @@ Given /we have the following news articles/ do |articles|
 end
 
 When /I click on news articles for (.*)/ do |name|
-  find(:xpath, "//tr[contains(.,'#{name}')]/td/a", :text => 'News Articles').click
+  find(:xpath, "//tr[contains(.,'#{name}')]/td/a", text: 'News Articles').click
 end
 
 Then /there should be (.*) articles/ do |num|
