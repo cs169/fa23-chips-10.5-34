@@ -24,6 +24,7 @@ RSpec.describe LoginController, type: :controller do
 
   describe '#google_oauth2' do
     let(:action) { :google_oauth2 }
+
     it_behaves_like 'authenticates and redirects to root'
   end
 
@@ -33,6 +34,7 @@ RSpec.describe LoginController, type: :controller do
     end
 
     let(:action) { :github }
+
     it_behaves_like 'authenticates and redirects to root'
   end
 
