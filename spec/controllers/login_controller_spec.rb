@@ -3,6 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe LoginController, type: :controller do
+  shared_examples 'authenticates and redirects to root' do
+    it 'redirects to URL after trying to start authentication session' do
+      get action
+      expect(response).to redirect_to(root_url)
+      expect(session[:current_user_id]).not_to be_nil
+    end
+  end
+
   before do
     Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
   end
@@ -15,12 +23,8 @@ RSpec.describe LoginController, type: :controller do
   end
 
   describe '#google_oauth2' do
-    # no google auth yet
-    it 'redirects to URL after trying to start Google authentication session' do
-      get :google_oauth2
-      expect(response).to redirect_to(root_url)
-      expect(session[:current_user_id]).not_to be_nil
-    end
+    let(:action) { :google_oauth2 }
+    it_behaves_like 'authenticates and redirects to root'
   end
 
   describe '#github' do
@@ -28,11 +32,8 @@ RSpec.describe LoginController, type: :controller do
       Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
     end
 
-    it 'redirects to URL after trying to start Github authentication session' do
-      get :github
-      expect(response).to redirect_to(root_url)
-      expect(session[:current_user_id]).not_to be_nil
-    end
+    let(:action) { :github }
+    it_behaves_like 'authenticates and redirects to root'
   end
 
   describe '#logout' do
@@ -46,16 +47,23 @@ RSpec.describe LoginController, type: :controller do
   end
 
   describe '#logged_in_already' do
-    it 'redirects to profile if user is already logged in' do
-      session[:current_user_id] = 1
-      get :login
-      expect(response).to redirect_to(user_profile_path)
-      expect(flash[:notice]).to eq('You are already logged in. Logout to switch accounts.')
+    let(:action) { :login }
+
+    context 'when user is already logged in' do
+      before { session[:current_user_id] = 1 }
+
+      it 'redirects to profile' do
+        get action
+        expect(response).to redirect_to(user_profile_path)
+        expect(flash[:notice]).to eq('You are already logged in. Logout to switch accounts.')
+      end
     end
 
-    it 'renders login template if user is not logged in' do
-      get :login
-      expect(response).to render_template('login')
+    context 'when user is not logged in' do
+      it 'renders login template' do
+        get action
+        expect(response).to render_template('login')
+      end
     end
   end
 end
