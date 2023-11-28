@@ -32,10 +32,10 @@
             - @representatives.each do |rep|
               %tr
                 %td= rep.name
-                %td= rep.office
+                %td= rep.title
                 %td
                   -# Pass county_id parameter to search#search route
-                  = link_to 'View', search_representatives_path(address: 'YOUR_ADDRESS_HERE', county_id: county.name), class: 'btn btn-primary'
+                  = link_to 'View', search_representatives_path(address: rep.address, county_id: county.name), class: 'btn btn-primary'
  /*New*/                       
 #actionmap-info-box
 .d-none#actionmap-info-container{ 'data-counties': @county_details.to_json, 'data-state': @state.to_json,
