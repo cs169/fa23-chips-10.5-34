@@ -3,6 +3,8 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 70px;
+    margin-bottom: 20px;
   }
 </style>
 
@@ -12,16 +14,16 @@
   <h2 class="text-center"><%= @representative.party %></h2>
   <h3 class="text-center">
     <% if @representative.line1.present? %>
-      <%= @representative.line1 %>
+      <%= @representative.line1 %>,
     <% end %>
     <% if @representative.line2.present? %>
-      <%= @representative.line2 %>
+      <%= @representative.line2 %>,
     <% end %>
     <% if @representative.line3.present? %>
-      <%= @representative.line3 %>
+      <%= @representative.line3 %>,
     <% end %>
-    <%= @representative.city %>
-    <%= @representative.state %>
+    <%= @representative.city %>,
+    <%= @representative.state %>,
     <%= @representative.zip %>
   </h3>
 </div>
