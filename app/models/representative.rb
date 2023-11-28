@@ -5,6 +5,10 @@ class Representative < ApplicationRecord
 
   def self.civic_api_to_representative_params(rep_info)
     reps = []
+    county_id = ''
+    county_name = rep_info.divisions.select { |key, _| key.include?('county:') }.values.first['name']
+    county_id = county_name
+    #ADDs county_id to each
 
     rep_info.officials.each_with_index do |official, index|
       ocdid_temp = ''
@@ -18,10 +22,10 @@ class Representative < ApplicationRecord
       end
       if Representative.find_by(name: official.name).nil?
         rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
-            title: title_temp })
+            title: title_temp, county_id: county_id})
       else
         rep = Representative.find_by(name: official.name)
-        rep.update(ocdid: ocdid_temp, title: title_temp)
+        rep.update(ocdid: ocdid_temp, title: title_temp, county_id: county_id)
       end
       reps.push(rep)
     end
