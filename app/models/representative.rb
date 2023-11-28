@@ -12,7 +12,7 @@ class Representative < ApplicationRecord
 
       reps.push(update_or_create_rep(title_temp, ocdid_temp, official, address_temp))
     end
-    
+
     reps
   end
 
