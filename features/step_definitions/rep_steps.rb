@@ -32,3 +32,21 @@ end
 Then /there should be (.*) entry for (.*)/ do |num, name|
   expect(Representative.where(name: name).count).to eq(num.to_i)
 end
+
+Given /the following representatives exist/ do |reps_list|
+  reps_list.hashes.each do |rep|
+    Representative.create(
+      name:  rep[:name],
+      ocdid: rep[:ocdid],
+      title: rep[:title],
+      line1: rep[:line1],
+      line2: rep[:line2],
+      line3: rep[:line3],
+      city:  rep[:city],
+      state: rep[:state],
+      zip:   rep[:zip],
+      party: rep[:party],
+      photo: rep[:photo]
+    )
+  end
+end
