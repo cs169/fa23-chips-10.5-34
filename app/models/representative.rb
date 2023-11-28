@@ -32,7 +32,11 @@ class Representative < ApplicationRecord
     existing_rep = Representative.find_by(name: official.name)
 
     if existing_rep.nil?
-      create_rep(address_temp, title_temp, ocdid_temp, official)
+      if address_temp.nil?
+        create_rep_no_addr(title_temp, ocdid_temp, official)
+      else
+        create_rep(address_temp, title_temp, ocdid_temp, official)
+      end
     else
       update_rep(existing_rep, title_temp, ocdid_temp, official, address_temp)
     end
@@ -50,6 +54,18 @@ class Representative < ApplicationRecord
         city:  address[0].city,
         state: address[0].state,
         zip:   address[0].zip,
+        party: official.party,
+        photo: official.photo_url
+      }
+    )
+  end
+
+  def self.create_rep_no_addr(title, ocd, official)
+    Representative.create!(
+      {
+        name:  official.name,
+        ocdid: ocd,
+        title: title,
         party: official.party,
         photo: official.photo_url
       }
