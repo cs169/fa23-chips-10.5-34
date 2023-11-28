@@ -8,6 +8,28 @@
                     %svg.d-inline#actionmap-state-counties-view{ version: 1.1, xmlns: 'http://www.w3.org/2000/svg' }
                         %title  Map of #{@state.name} highlighting #{@county.name}
                         /* SVG element will be filled using d3.js and a topojson file. */
+.row
+  .col-12
+    %section.my-4
+      %h2.text-center
+        = "#{@county.name}, #{@state}"
+
+      #actionmap-representatives-table
+        .table-responsive-md
+          %table.table.table-striped.table-hover
+            %caption Representatives for #{@county}
+            %thead.thead-dark
+              %tr
+                %th Name
+                %th Office
+                %th Links
+            %tbody
+              - @representatives.each do |rep|
+                %tr
+                  %td= rep.name
+                  %td= rep.title
+                  %td
+                    = link_to 'View', search_representatives_path(address: #{@county.name}, #{@state.name}, United States), class: 'btn btn-primary'
 #actionmap-info-box
 .d-none#actionmap-info-container{ 'data-counties': @county_details.to_json, 'data-state': @state.to_json,
 'data-state-topojson-file': asset_path("states/#{@state[:symbol].downcase}.topo.json"),
