@@ -13,6 +13,7 @@ class CampaignFinances < ApplicationRecord
   end
 
   def self.propublica_api_to_representatives(cycle, category)
+    candidates = []
     response = class.get('/campaign-finance/v1/#{cycle}/candidates/leaders/#{category}.json', headers: @headers)
     JSON.parse(response.body)['results'].each_with_index do |result, index|
       candidates.push(result.name)
