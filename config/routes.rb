@@ -42,7 +42,6 @@ Rails.application.routes.draw do
     get '/search/(:address)' => 'search#search', :as => 'search_representatives'
 
     # Routes for Campaign Finances
-    resources :campaign_finances do
-        # add campaign finances search routes here
-    end
+    get '/campaign_finances' => 'campaign_finances#search', :as => 'search_campaign_finances'
+    
 end
