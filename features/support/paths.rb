@@ -23,7 +23,7 @@ module NavigationHelpers
     #     user_profile_path(User.find_by_login($1))
 
     when /^the create news item page$/
-      '/representatives/1/representatives/1/my_news_item/new'
+      representative_new_my_news_item_path(representative_id: 1)
 
     else
       begin

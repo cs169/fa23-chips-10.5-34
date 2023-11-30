@@ -26,6 +26,14 @@ Background: representatives have been added to database
     And I click on news articles for Gavin Newsom
     Then I click on add news article
 
+
   Scenario: Create and edit a news item
     Given I am on the create news item page
+    And I fill in "title" with "test"
+    And I fill in "link" with "https://google.com"
+    And I fill in "description" with "test description"
+    And I fill in "representative" with "Gavin Newsom"
+    And I fill in "issue" with "Terrorism"
+
+
   
