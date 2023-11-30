@@ -3,7 +3,9 @@
 require 'httparty'
 
 class CampaignFinance < ApplicationRecord
-  base_uri = 'https://api.propublica.org'
+  #base_uri = 'https://api.propublica.org'
+  base_uri = 'https://api.propublica.org/campaign-finance/v1'
+  include HTTParty
 
   def initialize(api_key)
     @api_key = api_key
@@ -11,6 +13,39 @@ class CampaignFinance < ApplicationRecord
       'X-API-Key'    => @api_key,
       'Content-Type' => 'application/json'
     }
+  end
+=begin
+  def self.fetch_top_candidates(cycle, category)
+    candidates_data = []
+    api_key = 'YOUR_API_KEY_HERE'
+    url = "https://api.propublica.org/campaign-finance/v1/#{cycle}/candidates/leaders/#{category}.json"
+
+    headers = {
+      'X-API-Key': api_key
+    }
+    response = self.class.get("/#{cycle}/candidates/leaders/#{category}.json", headers: @headers)
+    #response = RestClient.get(url, headers)
+
+    candidates_data = JSON.parse(response.body)['results']
+    return candidates_data.first(20)
+  end
+=end
+  def self.fetch_top_candidates(cycle, category)
+    base_url = 'https://api.propublica.org/campaign-finance/v1'
+    cycle = '2020'
+    category = 'contribution-total'
+    url = URI("#{base_url}/#{cycle}/candidates/leaders/#{category}.json")
+
+    # Create an HTTP request
+    request = Net::HTTP::Get.new(url)
+    request['X-API-Key'] = "9lcjslvwVjbqtX0KcQQ3W9rFm316caQQ2T89n4xA"  # Replace 'YOUR_API_KEY' with your actual API key
+
+    # Make the request and handle the response
+    response = Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == 'https') do |http|
+      http.request(request)
+    end
+    data = JSON.parse(response.body)
+    puts data
   end
 
   def self.propublica_api_to_representatives(_cycle, _category)
