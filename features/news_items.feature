@@ -25,4 +25,7 @@ Background: representatives have been added to database
     And I press "commit"
     And I click on news articles for Gavin Newsom
     Then I click on add news article
+
+  Scenario: Create and edit a news item
+    Given I am on the create news item page
   
