@@ -29,7 +29,7 @@ module ApplicationHelper
       },
       {
         title: 'Campaign Finances',
-        link:  Rails.application.routes.url_helpers.campaign_finances_path
+        link:  Rails.application.routes.url_helpers.campaign_finance_index_path
       }
     ]
   end

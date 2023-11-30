@@ -42,6 +42,8 @@ Rails.application.routes.draw do
     get '/search/(:address)' => 'search#search', :as => 'search_representatives'
 
     # Routes for Campaign Finances
-    # resources :campaign_finances, only: [:index]
-    get '/campaign_finances' => 'campaign_finance#index'
+    # resources :campaign_finance, only: [:index, :show]
+    resources :campaign_finance, only: [:index] do
+        post 'search', on: :collection
+    end
 end
