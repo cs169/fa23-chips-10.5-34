@@ -28,12 +28,27 @@ Background: representatives have been added to database
 
 
   Scenario: Create and edit a news item
-    Given I am on the create news item page
+    Given I am authenticated
+    And I visit the create news item page
     And I fill in "title" with "test"
     And I fill in "link" with "https://google.com"
     And I fill in "description" with "test description"
     And I fill in "representative" with "Gavin Newsom"
     And I fill in "issue" with "Terrorism"
+    And I press "commit"
+    Then I should see "test"
+    And I should see "https://google.com"
+    And I should see "test description"
+    And I should see "Gavin Newsom"
+    And I should see "Terrorism"
+
+    When I press "Edit"
+    And I fill in "issue" with "Homelessness"
+    And I press "commit"
+    Then I should see "Homelessness"
+    And I should not see "Terrorism"
+    
+
 
 
   
