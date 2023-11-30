@@ -2,7 +2,7 @@
 require 'httparty'
 
 class CampaignFinances < ApplicationRecord
-  base_uri 'https://api.propublica.org'
+  base_uri = 'https://api.propublica.org'
 
   def initialize(api_key)
     @api_key = api_key

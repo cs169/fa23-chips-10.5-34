@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CampaignFinanceController < ApplicationController
+  
   def index
     @campaign_finances = CampaignFinances.all
   end
