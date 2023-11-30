@@ -9,7 +9,7 @@ When /I click on add news article/ do
 end
 
 When /I visit the create news item page/ do
-  visit path_to("the create news item page")
+  visit path_to('the create news item page')
 end
 
 When /I am authenticated/ do
