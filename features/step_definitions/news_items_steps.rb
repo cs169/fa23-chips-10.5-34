@@ -9,9 +9,6 @@ When /I click on add news article/ do
 end
 
 When /I visit the create news item page/ do
+  allow_any_instance_of(MyNewsItemsController).to receive(:require_login!).and_return(true)
   visit path_to('the create news item page')
-end
-
-When /I am authenticated/ do
-  Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
 end
