@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-12">
-      <% if @data.present? %>
+      <% if @data %>
         <table class="table">
           <thead>
             <tr>
@@ -17,7 +17,9 @@
           </tbody>
         </table>
       <% else %>
+      <div style="text-align: center; font-size: 30px; margin-top: 50px;">
         <p>No candidates found.</p>
+      </div>
       <% end %>
     </div>
   </div>

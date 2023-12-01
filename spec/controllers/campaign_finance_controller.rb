@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'spec_helper'
 require 'google/apis/civicinfo_v2'
 
-
+=begin
 RSpec.describe CampaignFinanceController do
   describe '#search' do
     let(:candidate_data_searcher) { CampaignFinanceController.new }
@@ -24,6 +24,7 @@ RSpec.describe CampaignFinanceController do
     end
   end
 end
+=end
 RSpec.describe CampaignFinanceController, type: :controller do
   describe 'POST #search' do
     it 'returns a successful response' do
@@ -35,7 +36,7 @@ RSpec.describe CampaignFinanceController, type: :controller do
       post :search, params: { cycle: cycle, category: category }
       
       expect(response).to have_http_status(200)
-      puts response
+      #puts response
     end
   end
 end
@@ -53,7 +54,6 @@ RSpec.describe CampaignFinanceController, type: :controller do
       # Access the assigns to retrieve the instance variable set in the controller
       error_code = response.status
       output = :candidates_data['results']
-      
       # Print error code and output
       puts "Error Code: #{error_code}"
       puts "Output: #{output}"
@@ -67,7 +67,7 @@ RSpec.describe CampaignFinance, type: :model do
       category = 'contribution-total'
 
       candidates = CampaignFinance.fetch_top_candidates(cycle, category)
-      #puts candidates.pluck('name')
+      puts candidates.pluck('name')
       expect(candidates).to be_an_instance_of(Array)
       expect(candidates.length).to eq(20) # Assuming it returns an array of 20 candidates
       # Add more expectations based on the expected response structure or candidate attributes

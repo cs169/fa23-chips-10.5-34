@@ -8,17 +8,17 @@ class CampaignFinanceController < ApplicationController
   def search
     selected_cycle = params[:election_cycle]
     selected_category = params[:category]
-    candidates_data = CampaignFinance.fetch_top_candidates(selected_cycle, selected_category)
+    candidates_data = CampaignFinance.propublica_api_to_representatives(selected_cycle, selected_category)
     puts "Test"
-    puts candidates_data.pluck('name')
-    puts "HI"
+    #puts candidates_data.pluck('name')
+    puts "Heroku sucks"
     #Not sure about the next two lines
+    @data = candidates_data#.pluck('name')
+    #render 'campaign_finance/search'
     respond_to do |format|
-      format.html { render 'index' } # Assuming an 'index' template exists for HTML format
-      format.json { render json: candidates_data }
+      format.html { render 'campaign_finance/search' } # Render the search view for HTML requests
+      format.json { render json: candidates_data } # Return JSON for JSON requests
     end
-    @data = candidates_data.pluck('name')
-    render 'campaign_finance/search'
   end
 =begin
   def search
