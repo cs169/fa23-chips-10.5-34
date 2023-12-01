@@ -32,8 +32,6 @@ class CampaignFinance < ApplicationRecord
 =end
   def self.fetch_top_candidates(cycle, category)
     base_url = 'https://api.propublica.org/campaign-finance/v1'
-    cycle = '2020'
-    category = 'contribution-total'
     url = URI("#{base_url}/#{cycle}/candidates/leaders/#{category}.json")
 
     # Create an HTTP request
