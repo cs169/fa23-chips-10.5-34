@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CampaignFinance < ApplicationRecord
-
   def self.fetch_top_candidates(cycle, category)
     url = URI.parse("https://api.propublica.org/campaign-finance/v1/#{cycle}/candidates/leaders/#{category}.json")
 
@@ -12,7 +11,6 @@ class CampaignFinance < ApplicationRecord
       http.request(request)
     end
     data = JSON.parse(response.body)
-    cdata = data["results"]
-    cdata
+    data['results']
   end
 end

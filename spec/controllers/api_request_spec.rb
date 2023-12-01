@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'json'
 require 'net/http'
@@ -25,10 +27,10 @@ RSpec.describe 'API Request', type: :request do
     expect(response.code).to eq('200')
 
     # Print out the response body
-    puts "Response Body:"
+    puts 'Response Body:'
     parsed_response = JSON.parse(response.body)
     parsed_response['results'].each do |candidate|
-      #puts candidate['name']
+      # puts candidate['name']
     end
   end
 end

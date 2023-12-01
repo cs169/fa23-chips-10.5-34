@@ -44,4 +44,5 @@ Rails.application.routes.draw do
     resources :campaign_finance, only: [:index] do
         post 'search', on: :collection
       end
+    get '/campaign_finance/search' => 'campaign_finance#search'
 end
