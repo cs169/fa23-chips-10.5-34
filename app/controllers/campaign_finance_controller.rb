@@ -8,8 +8,16 @@ class CampaignFinanceController < ApplicationController
   def search
     selected_cycle = params[:election_cycle]
     selected_category = params[:category]
+    candidates_data = CampaignFinance.fetch_top_candidates(selected_cycle, selected_category)
+    puts "Test"
+    puts candidates_data
+    puts "HI"
+    #Not sure about the next two lines
+    respond_to do |format|
+      format.html { render 'index' } # Assuming an 'index' template exists for HTML format
+      format.json { render json: candidates_data }
+    end
 
-    @candidates_data = CampaignFinance.fetch_top_candidates(selected_cycle, selected_category)
   end
 =begin
   def search

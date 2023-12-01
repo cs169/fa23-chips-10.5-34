@@ -44,8 +44,12 @@ class CampaignFinance < ApplicationRecord
     response = Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == 'https') do |http|
       http.request(request)
     end
-    data = JSON.parse(response.body)
-    puts data
+    cdata = JSON.parse(response.body)
+    data = cdata['results']
+    #data['results'].each do |candidate|
+      #puts candidate['name']
+    #end
+    data
   end
 
   def self.propublica_api_to_representatives(_cycle, _category)

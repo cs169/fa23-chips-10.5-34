@@ -26,6 +26,9 @@ RSpec.describe 'API Request', type: :request do
 
     # Print out the response body
     puts "Response Body:"
-    puts JSON.parse(response.body)
+    parsed_response = JSON.parse(response.body)
+    parsed_response['results'].each do |candidate|
+      #puts candidate['name']
+    end
   end
 end
