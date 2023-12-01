@@ -14,6 +14,7 @@ class CampaignFinanceController < ApplicationController
     puts "Heroku sucks"
     #Not sure about the next two lines
     @data = candidates_data#.pluck('name')
+    put @data
     #render 'campaign_finance/search'
     respond_to do |format|
       format.html { render 'campaign_finance/search' } # Render the search view for HTML requests
