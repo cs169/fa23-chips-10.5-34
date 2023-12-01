@@ -9,7 +9,7 @@ class CampaignFinanceController < ApplicationController
     selected_cycle = params[:cycle]
     selected_category = params[:category]
     candidates_data = CampaignFinance.fetch_top_candidates(selected_cycle, selected_category)
-    @data = candidates_data.pluck(:name)
+    @data = candidates_data
     render 'campaign_finance/search'
   end
 end
