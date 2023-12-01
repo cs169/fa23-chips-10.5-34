@@ -17,8 +17,8 @@ class CampaignFinanceController < ApplicationController
       format.html { render 'index' } # Assuming an 'index' template exists for HTML format
       format.json { render json: candidates_data }
     end
-    candidates_data
-
+    @data = candidates_data.pluck('name')
+    render 'campaign_finance/search'
   end
 =begin
   def search
