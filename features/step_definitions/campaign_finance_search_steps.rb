@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-Given('I am on the campaign finances page') do
+Given('I visit the campaign finances page') do
   visit campaign_finance_index_path
 end
 
-Then('I am on the campaign finances search page') do
+Then('I visit the campaign finances search page') do
   visit search_campaign_finance_index_path
 end
 
