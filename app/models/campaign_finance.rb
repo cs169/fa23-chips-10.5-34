@@ -12,7 +12,6 @@ class CampaignFinance < ApplicationRecord
     end
 
     cdata = JSON.parse(response.body)
-    data = cdata['results']
-    data
+    cdata['results']
   end
 end
