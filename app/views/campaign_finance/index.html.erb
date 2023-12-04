@@ -1,0 +1,33 @@
+<% cycles = (2010..2020).to_a.reverse.map { |year| [year.to_s, year.to_s] } %>
+<% categories = [
+  ['Candidate Loan', 'candidate-loan'],
+  ['Contribution Total', 'contribution-total'],
+  ['Debts Owed', 'debts-owed'],
+  ['Disbursements Total', 'disbursements-total'],
+  ['End Cash', 'end-cash'],
+  ['Individual Total', 'individual-total'],
+  ['PAC Total', 'pac-total'],
+  ['Receipts Total', 'receipts-total'],
+  ['Refund Total', 'refund-total']
+  ] 
+%>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_tag(search_campaign_finance_index_path, method: 'post', class: 'form-inline') do %>
+        <div class="form-group mb-2">
+          <%= label_tag 'cycle', 'Year:', class: 'mr-2' %>
+          <%= select_tag 'cycle', options_for_select(cycles), class: 'form-control' %>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+          <%= label_tag 'category', 'Category:', class: 'mr-2' %>
+          <%= select_tag 'category', options_for_select(categories), class: 'form-control' %>
+        </div>
+
+        <%= submit_tag 'Search', class: 'btn btn-primary mb-2' %>
+      <% end %>
+    </div>
+  </div>
+</div>

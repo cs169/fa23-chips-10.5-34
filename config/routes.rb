@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     get '/ajax/state/:state_symbol' => 'ajax#counties'
 
     # Routes for Events
-    resources :events, only: %i[index show]
+    resources :events, only: [:index, :show]
     get '/my_events/new' => 'my_events#new', :as => :new_my_event
     match '/my_events/new', to: 'my_events#create', via: [:post]
     get '/my_events/:id' => 'my_events#edit', :as => :edit_my_event
@@ -40,4 +40,9 @@ Rails.application.routes.draw do
                                                                       via: [:delete]
     end
     get '/search/(:address)' => 'search#search', :as => 'search_representatives'
+
+    resources :campaign_finance, only: [:index] do
+        post 'search', on: :collection
+      end
+    get '/campaign_finance/search' => 'campaign_finance#search'
 end
