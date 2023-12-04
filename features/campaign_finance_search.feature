@@ -4,8 +4,8 @@ Feature: Campaign Finance Search
   So that I can view information about top candidates in a specific financial category for a given campaign cycle
 
   Scenario: Search for candidate finance data
-    Given I am on the campaign finances page
+    Given I visit the campaign finances page
     When I select "2020" from "cycle"
     And I select "Contribution Total" from "category"
     And I press "Search"
-    Then I am on the campaign finances search page
+    Then I visit the campaign finances search page
