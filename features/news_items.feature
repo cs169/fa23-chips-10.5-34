@@ -25,4 +25,29 @@ Background: representatives have been added to database
     And I press "commit"
     And I click on news articles for Gavin Newsom
     Then I click on add news article
+
+
+  Scenario: Create and edit a news item
+    Given I visit the create news item page
+    And I fill in "news_item_title" with "test"
+    And I fill in "news_item_link" with "https://google.com"
+    And I fill in "news_item_description" with "test description"
+    And I select "Gavin Newsom" from "news_item_representative_id"
+    And I select "Terrorism" from "news_item_issue"
+    And I press "commit"
+    Then I should see "test"
+    And I should see "https://google.com"
+    And I should see "test description"
+    And I should see "Gavin Newsom"
+    And I should see "Terrorism"
+
+    When I follow "Edit"
+    And I select "Homelessness" from "news_item_issue"
+    And I press "commit"
+    Then I should see "Homelessness"
+    And I should not see "Terrorism"
+    
+
+
+
   
