@@ -4,6 +4,10 @@ require 'rails_helper'
 require 'spec_helper'
 require 'google/apis/civicinfo_v2'
 
+<<<<<<< HEAD
+=======
+=begin
+>>>>>>> d30eec81a2861c8e18b5f9ec6c8f971ed80cfa13
 RSpec.describe CampaignFinanceController do
   describe '#search' do
     let(:candidate_data_searcher) { described_class.new }
@@ -23,7 +27,11 @@ RSpec.describe CampaignFinanceController do
     end
   end
 end
+<<<<<<< HEAD
 
+=======
+=end
+>>>>>>> d30eec81a2861c8e18b5f9ec6c8f971ed80cfa13
 RSpec.describe CampaignFinanceController, type: :controller do
   describe 'POST #search' do
     it 'returns a successful response' do
@@ -34,9 +42,15 @@ RSpec.describe CampaignFinanceController, type: :controller do
                                                                                                  'OK'))
 
       post :search, params: { cycle: cycle, category: category }
+<<<<<<< HEAD
 
       expect(response).to have_http_status(:ok)
       puts response
+=======
+      
+      expect(response).to have_http_status(200)
+      #puts response
+>>>>>>> d30eec81a2861c8e18b5f9ec6c8f971ed80cfa13
     end
   end
 end
@@ -55,7 +69,10 @@ RSpec.describe CampaignFinanceController, type: :controller do
       # Access the assigns to retrieve the instance variable set in the controller
       error_code = response.status
       output = :candidates_data['results']
+<<<<<<< HEAD
 
+=======
+>>>>>>> d30eec81a2861c8e18b5f9ec6c8f971ed80cfa13
       # Print error code and output
       puts "Error Code: #{error_code}"
       puts "Output: #{output}"
@@ -69,8 +86,13 @@ RSpec.describe CampaignFinance, type: :model do
       cycle = '2020'
       category = 'contribution-total'
 
+<<<<<<< HEAD
       candidates = described_class.fetch_top_candidates(cycle, category)
       # puts candidates.pluck('name')
+=======
+      candidates = CampaignFinance.fetch_top_candidates(cycle, category)
+      puts candidates.pluck('name')
+>>>>>>> d30eec81a2861c8e18b5f9ec6c8f971ed80cfa13
       expect(candidates).to be_an_instance_of(Array)
       expect(candidates.length).to eq(20) # Assuming it returns an array of 20 candidates
       # Add more expectations based on the expected response structure or candidate attributes

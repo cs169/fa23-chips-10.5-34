@@ -10,7 +10,9 @@ class CampaignFinance < ApplicationRecord
     response = Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == 'https') do |http|
       http.request(request)
     end
-    data = JSON.parse(response.body)
-    data['results']
+
+    cdata = JSON.parse(response.body)
+    data = cdata['results']
+    data
   end
 end
